@@ -10,7 +10,7 @@
     >
       <div class="title-container">
         <h3 class="title">
-          <img src="@/assets/common/login-logo.png" alt="" />
+          <img src="@/assets/common/login-logo.png" alt="">
         </h3>
       </div>
 
@@ -57,7 +57,7 @@
         type="primary"
         style="width: 100%; margin-bottom: 30px"
         @click.native.prevent="handleLogin"
-        >登录
+      >登录
       </el-button>
 
       <div class="tips">
@@ -129,8 +129,15 @@ export default {
       // 未做错误处理
       this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
-          await this['user/login'](this.loginForm)
-          this.$router.push('/')
+          try {
+            this.loading = true
+            await this['user/login'](this.loginForm)
+            this.$router.push('/')
+          } catch (error) {
+            console.log(error)
+          } finally {
+            this.loading = false
+          }
         }
       })
     }
