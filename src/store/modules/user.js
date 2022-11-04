@@ -10,12 +10,18 @@ const mutations = {
     state.token = token
     setToken(token)
   },
+  // 移除token
   removeToken(state) {
     state.token = null
     removeToken()
   },
+  // 获取用户信息
   setUserInfo(state, result) {
     state.userInfo = result
+  },
+  // 删除用户信息
+  removeUserInfo(state) {
+    state.userInfo = {}
   }
 }
 const actions = {
@@ -23,7 +29,7 @@ const actions = {
     const result = await login(data)
     context.commit('setToken', result)
   },
-  async getUserinfo(context) {
+  async getUserInfo(context) {
     const result = await getUserInfo()
     context.commit('setUserInfo', result)
     return result
