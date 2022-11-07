@@ -17,7 +17,7 @@ export function getUserInfo() {
 // 根据用户id获取详细信息
 export function getUserDetailById(id) {
   return request({
-    url: '/sys/user/${id}'
+    url: `/sys/user/${id}`
   })
 }
 
