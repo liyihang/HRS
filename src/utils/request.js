@@ -28,6 +28,14 @@ service.interceptors.request.use(
     }
     return config // 必须返回配置
   }, error => {
+    // 这里错误判断类型要详细说明
+    if (error.response && error.response.data && error.response.data.code !== 10002) {
+      // 退出登录
+      store.dispatch('user/logout')
+      router.push('/login')
+    } else {
+      Message.error(error.message)
+    }
     return Promise.reject(error)
   }
 ) // 请求拦截器
