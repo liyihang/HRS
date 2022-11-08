@@ -10,7 +10,8 @@ export default {
       path: '',
       component: () => import('@/views/departments'),
       meta: {
-        title: '部门'
+        title: '部门管理',
+        icon: 'tree'
       }
     }
   ]

@@ -2,7 +2,7 @@
   <div class="dashboard-container">
     <div class="app-container">
       <h2>
-        考勤
+        考勤管理
       </h2>
     </div>
   </div>

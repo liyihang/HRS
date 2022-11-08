@@ -2,7 +2,7 @@
   <div class="dashboard-container">
     <div class="app-container">
       <h2>
-        薪水
+        薪水管理
       </h2>
     </div>
   </div>
