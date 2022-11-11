@@ -13,6 +13,7 @@
 
 <script>
 import treeTools from './components/tree-tools.vue'
+import { getDepartments } from '@/api/departments'
 export default {
   components: {
     treeTools
@@ -29,6 +30,16 @@ export default {
       departs: [{ name: '总裁办', manager: '曹操', children: [{ name: '董事会', manager: '曹丕' }] },
         { name: '行政部', manager: '刘备' },
         { name: '人事部', manager: '孙权' }]
+    }
+  },
+  created() {
+    this.getDepartments()
+  },
+  methods: {
+    async getDepartments() {
+      const res = await getDepartments()
+      this.company = { name: res.companyName, manager: '负责人' }
+      console.log(res)
     }
   }
 }
