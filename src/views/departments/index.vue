@@ -3,7 +3,7 @@
     <div class="app-container" />
     <el-card class="tree-card">
       <!-- 用了一个行列布局 -->
-      <tree-tools :tree-node="company" />
+      <tree-tools :tree-node="company" :is-root="true" />
       <el-tree :data="departs" :props="defaultProps" :default-expand-all="true">
         <tree-tools slot-scope="{ data }" :tree-node="data" />
       </el-tree>
