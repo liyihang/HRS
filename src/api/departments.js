@@ -8,3 +8,10 @@ export function getDepartments() {
     url: '/company/department'
   })
 }
+
+export function delDepartmentById(id) {
+  return request({
+    url: `/company/departments/${id}`,
+    method: 'delete'
+  })
+}
