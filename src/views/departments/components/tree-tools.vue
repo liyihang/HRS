@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { delDepartmentById } from '@/api/departments'
 // 该组件需要对外开放属性 外部需要提供一个对象 对象里需要有name  manager
 export default {
   // props可以用数组来接收数据 也可以用对象来接收
@@ -50,8 +51,15 @@ export default {
       } else if (command === 'edit') {
         console.log(123)
       } else {
-        this.$confirm('确定删除吗？').then(() => {
-          alert('click del')
+        this.$confirm('确定删除吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          return delDepartmentById(this.treeNode.id)
+        }).then(() => {
+          this.$emit('delDepts') // 触发自定义事件
+          this.$message.success('删除部门成功')
         })
       }
     }
