@@ -15,3 +15,10 @@ export function delDepartmentById(id) {
     method: 'delete'
   })
 }
+export function addDepartment(data) {
+  return request({
+    url: '/company/department',
+    method: 'post',
+    data
+  })
+}

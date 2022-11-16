@@ -8,6 +8,8 @@
         <tree-tools slot-scope="{ data }" :tree-node="data" @delDepts="getDepartments" />
       </el-tree>
     </el-card>
+    <!-- dialog -->
+    <add-depts />
   </div>
 </template>
 
@@ -15,9 +17,11 @@
 import treeTools from './components/tree-tools.vue'
 import { getDepartments } from '@/api/departments'
 import { transListTreeData } from '@/utils/index'
+import addDepts from './components/add-depts.vue'
 export default {
   components: {
-    treeTools
+    treeTools,
+    addDepts
   },
   data () {
     return {
