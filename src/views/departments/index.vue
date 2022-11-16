@@ -3,13 +3,13 @@
     <div class="app-container" />
     <el-card class="tree-card">
       <!-- 用了一个行列布局 -->
-      <tree-tools :tree-node="company" :is-root="true" />
+      <tree-tools :tree-node="company" :is-root="true" @addDept="addDept" />
       <el-tree :data="departs" :props="defaultProps" :default-expand-all="true">
-        <tree-tools slot-scope="{ data }" :tree-node="data" @delDepts="getDepartments" />
+        <tree-tools slot-scope="{ data }" :tree-node="data" @delDepts="getDepartments" @addDept="addDept" />
       </el-tree>
     </el-card>
     <!-- dialog -->
-    <add-depts />
+    <add-depts :show-dialog="showDialog" />
   </div>
 </template>
 
@@ -34,7 +34,10 @@ export default {
       },
       departs: [{ name: '总裁办', manager: '曹操', children: [{ name: '董事会', manager: '曹丕' }] },
         { name: '行政部', manager: '刘备' },
-        { name: '人事部', manager: '孙权' }]
+        { name: '人事部', manager: '孙权' }],
+      // 弹层
+      showDialog: false,
+      node: null
     }
   },
   created() {
@@ -45,6 +48,12 @@ export default {
       const res = await getDepartments()
       this.company = { name: res.companyName, manager: '负责人' }
       this.departs = transListTreeData(res.depts, '')
+    },
+    // add department listen  emit addDept
+    addDept(node) {
+      // show dialog
+      this.showDialog = true
+      console.log(node)
     }
   }
 }

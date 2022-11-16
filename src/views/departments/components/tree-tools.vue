@@ -47,7 +47,8 @@ export default {
   methods: {
     oprateDept(command) {
       if (command === 'add') {
-        console.log(123)
+        // 触发自定义事件
+        this.$emit('addDept', this.treeNode)
       } else if (command === 'edit') {
         console.log(123)
       } else {
