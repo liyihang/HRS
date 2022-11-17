@@ -9,7 +9,7 @@
       </el-tree>
     </el-card>
     <!-- dialog -->
-    <add-depts :show-dialog="showDialog" />
+    <add-depts :show-dialog="showDialog" :tree-node="node" />
   </div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
     addDept(node) {
       // show dialog
       this.showDialog = true
-      console.log(node)
+      this.node = node
     }
   }
 }
