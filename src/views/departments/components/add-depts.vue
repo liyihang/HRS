@@ -10,7 +10,9 @@
         <el-input v-model="formData.code" style="width:80%" />
       </el-form-item>
       <el-form-item label="部门负责人" prop="manager">
-        <el-select v-model="formData.manager" style="width:80%" />
+        <el-select v-model="formData.manager" style="width:80%" @focus="getEmployeeSimple">
+          <el-option v-for="item in peoples" :key="item.id" :label="item.username" :value="item.username" />
+        </el-select>
       </el-form-item>
       <el-form-item label="部门介绍" prop="introduce">
         <el-input v-model="formData.introduce" style="width:80%" type="textarea" :rows="3" />
@@ -28,6 +30,7 @@
 
 <script>
 import { getDepartments } from '@/api/departments'
+import { getEmployeeSimple } from '@/api/employees'
 export default {
   props: {
     showDialog: {
@@ -56,6 +59,7 @@ export default {
       isRepeat ? callback(new Error(`已经存在部门编码${value}！`)) : callback()
     }
     return {
+      peoples: [],
       formData: {
         name: '',
         code: '',
@@ -73,6 +77,11 @@ export default {
         manager: [{ required: true, message: '负责人不能为空', trigger: 'blur' }],
         introduce: [{ required: true, message: '介绍不能为空', trigger: 'blur' }, { min: 1, max: 50, message: '长度为1-50字符', trigger: 'blur' }]
       }
+    }
+  },
+  methods: {
+    async getEmployeeSimple() {
+      this.peoples = await getEmployeeSimple()
     }
   }
 }
