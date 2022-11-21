@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { getDepartments, addDepartment } from '@/api/departments'
+import { getDepartments, addDepartment, getDepartDetail } from '@/api/departments'
 import { getEmployeeSimple } from '@/api/employees'
 export default {
   props: {
@@ -83,6 +83,10 @@ export default {
     // 获取负责人
     async getEmployeeSimple() {
       this.peoples = await getEmployeeSimple()
+    },
+    // 获取部门详情
+    async getDepartDetail(id) {
+      this.formData = await getDepartDetail(id)
     },
     btnConfirm() {
       this.$refs.deptForm.validate(async isValidate => {

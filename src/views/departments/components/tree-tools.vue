@@ -50,7 +50,7 @@ export default {
         // 触发自定义事件
         this.$emit('addDept', this.treeNode)
       } else if (command === 'edit') {
-        console.log(123)
+        this.$emit('editDept', this.treeNode)
       } else {
         this.$confirm('确定删除吗？', '提示', {
           confirmButtonText: '确定',

@@ -5,11 +5,11 @@
       <!-- 用了一个行列布局 -->
       <tree-tools :tree-node="company" :is-root="true" @addDept="addDept" />
       <el-tree :data="departs" :props="defaultProps" :default-expand-all="true">
-        <tree-tools slot-scope="{ data }" :tree-node="data" @delDepts="getDepartments" @addDept="addDept" />
+        <tree-tools slot-scope="{ data }" :tree-node="data" @delDepts="getDepartments" @addDept="addDept" @editDept="editDept" />
       </el-tree>
     </el-card>
     <!-- dialog -->
-    <add-depts :show-dialog.sync="showDialog" :tree-node="node" @addDepts="getDepartments" />
+    <add-depts ref="addDept" :show-dialog.sync="showDialog" :tree-node="node" @addDepts="getDepartments" />
   </div>
 </template>
 
@@ -54,6 +54,13 @@ export default {
       // show dialog
       this.showDialog = true
       this.node = node
+    },
+    editDept(node) {
+      // show dialog
+      this.showDialog = true
+      this.node = node
+      // 调用子组件方法
+      this.$refs.addDept.getDepartDetail(node.id)
     }
   }
 }
