@@ -9,7 +9,7 @@
       </el-tree>
     </el-card>
     <!-- dialog -->
-    <add-depts :show-dialog="showDialog" :tree-node="node" @addDepts="getDepartments" />
+    <add-depts :show-dialog.sync="showDialog" :tree-node="node" @addDepts="getDepartments" />
   </div>
 </template>
 

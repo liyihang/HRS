@@ -89,6 +89,8 @@ export default {
         if (isValidate) {
           await addDepartment({ ...this.formData, pid: this.treeNode.id })
           this.$emit('addDepts')
+          // 关闭弹窗
+          this.$emit('update:showDialog', false)
         }
       })
     }
