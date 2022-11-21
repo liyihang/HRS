@@ -1,6 +1,6 @@
 <template>
   <!-- 弹层 -->
-  <el-dialog title="新增部门" :visible="showDialog">
+  <el-dialog title="新增部门" :visible="showDialog" @close="btnClick">
     <!-- 表单 -->
     <el-form ref="deptForm" label-width="120px" :model="formData" :rules="rules">
       <el-form-item label="部门名称" prop="name">
@@ -21,7 +21,7 @@
     <!-- 确认消息 -->
     <el-row slot="footer" type="flex" justify="center">
       <el-col :span="6">
-        <el-button size="mini">取消</el-button>
+        <el-button size="mini" @click="btnClick">取消</el-button>
         <el-button size="mini" type="primary" @click="btnConfirm">确认</el-button>
       </el-col>
     </el-row>
@@ -93,6 +93,10 @@ export default {
           this.$emit('update:showDialog', false)
         }
       })
+    },
+    btnClick() {
+      this.$emit('update:showDialog', false)
+      this.$refs.deptForm.resetFields()
     }
   }
 }
