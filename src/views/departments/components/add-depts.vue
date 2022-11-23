@@ -1,6 +1,6 @@
 <template>
   <!-- 弹层 -->
-  <el-dialog title="新增部门" :visible="showDialog" @close="btnClick">
+  <el-dialog :title="showTitle" :visible="showDialog" @close="btnClick">
     <!-- 表单 -->
     <el-form ref="deptForm" label-width="120px" :model="formData" :rules="rules">
       <el-form-item label="部门名称" prop="name">
@@ -77,6 +77,11 @@ export default {
         manager: [{ required: true, message: '负责人不能为空', trigger: 'blur' }],
         introduce: [{ required: true, message: '介绍不能为空', trigger: 'blur' }, { min: 1, max: 50, message: '长度为1-50字符', trigger: 'blur' }]
       }
+    }
+  },
+  computed: {
+    showTitle() {
+      return this.formData.id ? '编辑部门' : '新增子部门'
     }
   },
   methods: {
