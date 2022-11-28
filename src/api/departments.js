@@ -31,9 +31,26 @@ export function addDepartment(data) {
     data
   })
 }
-
+/**
+ *
+ * @param {*} id
+ * @returns departmentDetail
+ */
 export function getDepartDetail(id) {
   return request({
     url: `/company/department/${id}`
+  })
+}
+/**
+ *
+ * @param {*} id
+ * @returns boolean
+ * 保存更新
+ */
+export function updateDepartments(data) {
+  return request({
+    url: `/company/department/${data.id}`,
+    method: 'put',
+    data
   })
 }

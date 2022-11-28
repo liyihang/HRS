@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { getDepartments, addDepartment, getDepartDetail } from '@/api/departments'
+import { getDepartments, addDepartment, getDepartDetail, updateDepartments } from '@/api/departments'
 import { getEmployeeSimple } from '@/api/employees'
 export default {
   props: {
@@ -96,7 +96,11 @@ export default {
     btnConfirm() {
       this.$refs.deptForm.validate(async isValidate => {
         if (isValidate) {
-          await addDepartment({ ...this.formData, pid: this.treeNode.id })
+          if (this.formData.id) {
+            await addDepartment({ ...this.formData, pid: this.treeNode.id })
+          } else {
+            await updateDepartments(this.formData)
+          }
           this.$emit('addDepts')
           // 关闭弹窗
           this.$emit('update:showDialog', false)
