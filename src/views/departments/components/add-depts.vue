@@ -46,16 +46,28 @@ export default {
     // check dept name repeat
     const checkNameRepeat = async(rule, value, callback) => {
       const { depts } = await getDepartments()
-      console.log(this.treeNode)
+      let isRepeat = false
       // 同级部门子节点
-      const isRepeat = depts.filter(item => item.pid === this.treeNode.id).some(item => item.name === value)
+      if (this.formData.id) {
+        // 编辑
+        isRepeat = depts.filter(item => item.pid === this.treeNode.pid && item.id !== this.treeNode.id).some(item => item.name === value)
+      } else {
+        // 新增
+        isRepeat = depts.filter(item => item.pid === this.treeNode.id).some(item => item.name === value)
+      }
       isRepeat ? callback(new Error(`已经存在${value}！`)) : callback()
     }
     // check dept name repeat
     const checkCodeRepeat = async(rule, value, callback) => {
       const { depts } = await getDepartments()
+      let isRepeat = false
+      if (this.formData.id) {
+        console.log(this.formData.id)
+        isRepeat = depts.some(item => item.id !== this.formData.id && item.code === value && value)
+      } else {
+        isRepeat = depts.some(item => item.code === value && value)
+      }
       // 同级部门子节点
-      const isRepeat = depts.some(item => item.code === value && value)
       isRepeat ? callback(new Error(`已经存在部门编码${value}！`)) : callback()
     }
     return {
@@ -97,9 +109,9 @@ export default {
       this.$refs.deptForm.validate(async isValidate => {
         if (isValidate) {
           if (this.formData.id) {
-            await addDepartment({ ...this.formData, pid: this.treeNode.id })
-          } else {
             await updateDepartments(this.formData)
+          } else {
+            await addDepartment({ ...this.formData, pid: this.treeNode.id })
           }
           this.$emit('addDepts')
           // 关闭弹窗
