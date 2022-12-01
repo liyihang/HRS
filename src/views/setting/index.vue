@@ -18,12 +18,34 @@
               </el-table-column>
             </el-table>
             <!-- pagination -->
-            <el-row type="flex" align="middle" justify="center" style="height:60">
+            <el-row type="flex" align="middle" justify="center" style="height:60px">
               <el-pagination layout="prev,pager,next" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="公司信息">
-            123123
+            <el-alert
+              title="对公司名称、公司地址、营业执照、公司地区的更新，将使得公司资料被重新审核，请谨慎修改"
+              type="info"
+              show-icon
+              :closable="false"
+            />
+            <el-form label-width="120px" style="margin-top:50px">
+              <el-form-item label="公司名称">
+                <el-input disabled style="width:400px" />
+              </el-form-item>
+              <el-form-item label="公司地址">
+                <el-input disabled style="width:400px" />
+              </el-form-item>
+              <el-form-item label="电话">
+                <el-input disabled style="width:400px" />
+              </el-form-item>
+              <el-form-item label="邮箱">
+                <el-input disabled style="width:400px" />
+              </el-form-item>
+              <el-form-item label="备注">
+                <el-input type="textarea" rows="3" disabled style="width:400px" />
+              </el-form-item>
+            </el-form>
           </el-tab-pane>
         </el-tabs>
       </el-card>
